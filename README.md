@@ -1,6 +1,6 @@
 # projeto-formulario-back
 
-Backend da Aplicação formulário web com PWA, construído com **Express**, **Supabase** e **Nodemailer**. Pronto para deploy no **Render**.
+Backend da Aplicação formulário web com PWA, construído com **Express**, **Supabase** e **Nodemailer**. Deploy no **Render**.
 
 ## Estrutura
 
@@ -29,33 +29,29 @@ src/
 ```bash
 npm install
 cp .env.example .env
+# Preencha o .env com suas credenciais
 npm run dev
 ```
 
 ## Endpoints
 
-- POST /api/auth/register
-- POST /api/auth/login
-- POST /api/auth/logout (autenticado)
-- POST /api/form (autenticado)
-- GET  /api/form (autenticado)
-- GET  /health
+| Método | Rota | Auth | Descrição |
+|--------|------|------|-----------|
+| GET | /health | ❌ | Status da API |
+| POST | /api/auth/register | ❌ | Cadastro |
+| POST | /api/auth/login | ❌ | Login |
+| POST | /api/auth/logout | ✅ | Logout |
+| POST | /api/form | ✅ | Enviar formulário |
+| GET  | /api/form | ✅ | Listar formulários |
 
-## Supabase - Tabela necessária
+## Supabase
 
-```sql
-create table formularios (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid references auth.users(id),
-  nome text,
-  email text,
-  mensagem text,
-  created_at timestamptz default now()
-);
-```
+- **Projeto:** https://llgaplcmkszofndobupn.supabase.co
+- **Região:** sa-east-1 (São Paulo)
+- A tabela `formularios` já foi criada com RLS ativo.
 
 ## Deploy no Render
 
-- Build command: npm install
-- Start command: npm start
-- Adicione as variáveis de ambiente no painel do Render
+- **Build command:** `npm install`
+- **Start command:** `npm start`
+- Adicione as variáveis de ambiente do `.env.example` no painel do Render
